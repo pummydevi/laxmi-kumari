@@ -1,38 +1,59 @@
-var sea,ship;
-var seaImg,shipImg;
+var garden,rabbit;
+var gardenImg,rabbitImg;
+var leafImg;
 
 function preload(){
-  seaImg = loadImage("sea.png");
-  shipImg1 = loadAnimation("ship-1.png","ship-1.png",
-                            "ship-2.png","ship-1.png");
+  gardenImg = loadImage("garden.png");
+  rabbitImg = loadImage("rabbit.png");
 }
 
 function setup(){
+  
   createCanvas(400,400);
-  background("blue");
-
-  // Moving background
-  sea=createSprite(400,200);
-  sea.addImage(seaImg);
-  sea.velocityX = -5;
-  sea.scale=0.3;
-
   
-  ship = createSprite(130,200,30,30);
-  ship.addAnimation("movingShip",shipImg1);
-  ship.scale =0.25;
-  
+// Moving background
+garden=createSprite(200,200);
+garden.addImage(gardenImg);
+
+//creating boy running
+rabbit = createSprite(180,340,30,30);
+rabbit.scale =0.09;
+rabbit.addImage(rabbitImg);
 }
+
 
 function draw() {
   background(0);
-  sea.velocityX = -3;
-
   
-  //code to reset the background
-  if(sea.x < 0){
-    sea.x = sea.width/8;
-  }
-    
+  edges= createEdgeSprites();
+  rabbit.collide(edges);
+  rabbit.x=World.mouseX;
+
+
+
   drawSprites();
+}
+var select_sprites = Math.round(random(1,3));
+if (frameCount % 80 == 0) {
+if (select_sprites  == 1) 
+{ createApples(); }
+else if  (select_sprites == 2) {         
+else {  createApples(); } }
+
+}
+
+function createApples(){
+  apple=createSprite(random(50,350),40,10,10);
+  apple.addImage(apple.png);
+  apple.scale=0.1;
+  apple.velocityY=5;
+  apple.lifetime=150;
+}
+
+function createLeaves(){
+  leaf =createSprite(randon(50,350),40,10,10);
+  leaf.addImage(leaf.png);
+  leaf.scale=0.1;
+  leaf.velocityY=5;
+  leaf.lifetime=150;
 }
